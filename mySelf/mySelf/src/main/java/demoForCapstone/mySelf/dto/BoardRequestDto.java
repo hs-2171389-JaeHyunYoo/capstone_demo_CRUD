@@ -23,6 +23,13 @@ public class BoardRequestDto {
         this.content = content;
     }
 
+//    @Builder BoardRequestDto(Long id, String writer, String title, String content){
+//        this.id = id;
+//        this.writer = writer;
+//        this.title = title;
+//        this.content = content;
+//    }
+
     public Board ToEntity(){
         return Board.builder()
                 .writer(this.writer)

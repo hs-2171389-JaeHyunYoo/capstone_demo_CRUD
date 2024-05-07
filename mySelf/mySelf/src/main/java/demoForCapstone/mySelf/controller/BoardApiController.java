@@ -20,6 +20,12 @@ public class BoardApiController {
     private final BoardServiceImpl boardService;
     private final BoardRepository boardRepository;
 
+    //for Demo
+    private final BoardRequestDto crud = new BoardRequestDto("writer_test", "title_test", "content_test");
+
+
+
+    //Insert
     @PostMapping("/api/post")
     public BoardResponseDto savePost(@RequestBody @Validated BoardRequestDto request) {
         boardService.savePost(request);
@@ -29,6 +35,18 @@ public class BoardApiController {
                 request.ToEntity().getWriter(),
                 request.ToEntity().getContent());
     }
+
+    //DEMO Insert Test
+    @PostMapping("/test/insert")
+    public BoardResponseDto insertTest(){
+        boardService.savePost(crud);
+        return new BoardResponseDto(
+                crud.getTitle(),
+                crud.getWriter(),
+                crud.getContent()
+        );
+    }
+
 
     @PutMapping("/api/post/{id}")
     public BoardResponseDto updatePost(@PathVariable("id") Long id,
