@@ -1,8 +1,6 @@
 package demoForCapstone.mySelf.service;
 
-import demoForCapstone.mySelf.domain.Board;
 import demoForCapstone.mySelf.domain.Walking;
-import demoForCapstone.mySelf.dto.BoardRequestDto;
 import demoForCapstone.mySelf.dto.WalkingRequestDto;
 import demoForCapstone.mySelf.repository.WalkingRepository;
 import jakarta.transaction.Transactional;
