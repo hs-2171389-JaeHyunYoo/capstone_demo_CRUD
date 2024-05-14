@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
 @Entity
+@Setter
 public class Post {
     @Id
     @GeneratedValue

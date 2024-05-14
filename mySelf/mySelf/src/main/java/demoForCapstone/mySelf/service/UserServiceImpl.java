@@ -61,9 +61,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateUser(Integer id, UserRequestDto userRequestDto) {
-        Optional<User> byId = userRepository.findById(id);
-        User user = byId.get();
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
 
-        user.updateUser(userRequestDto.getUser_id(), userRequestDto.getUser_nickname());
+            existingUser.setUser_nickname(userRequestDto.getUser_nickname());
+
+            userRepository.save(existingUser);
+        }
+        else{
+            System.out.println("no User instance with " + id);
+        }
+
     }
 }

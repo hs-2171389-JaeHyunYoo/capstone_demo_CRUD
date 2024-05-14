@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Entity
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
+@Setter
 public class User {
     @Id
     @GeneratedValue

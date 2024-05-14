@@ -59,9 +59,18 @@ public class TagServiceImpl implements TagService{
     @Transactional
     @Override
     public void updateTag(Integer id, TagRequestDto tagRequestDto) {
-        Optional<Tag> byId = tagRepository.findById(id);
-        Tag tag = byId.get();
+        Optional<Tag> optionalTag = tagRepository.findById(id);
 
-        tag.updateTag(tagRequestDto.getTag_id(), tagRequestDto.getTag_name());
+        if (optionalTag.isPresent()){
+            Tag existingTag = optionalTag.get();
+
+            existingTag.setTag_name(tagRequestDto.getTag_name());
+
+            tagRepository.save(existingTag);
+        }
+        else{
+            System.out.println("no instance with "+id);
+        }
+
     }
 }

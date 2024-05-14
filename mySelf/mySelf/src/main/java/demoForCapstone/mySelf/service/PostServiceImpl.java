@@ -64,9 +64,20 @@ public class PostServiceImpl implements PostService{
     @Transactional
     @Override
     public void updatePost(Integer id, PostRequestDto postRequestDto) {
-        Optional<Post> byId = postRepository.findById(id);
-        Post post = byId.get();
+        Optional<Post> optionalPost = postRepository.findById(id);
 
-        post.updateComment(postRequestDto.getPost_id(), postRequestDto.getPost_writer(), postRequestDto.getPost_title(), postRequestDto.getPost_content());
+        if(optionalPost.isPresent()){
+            Post existingPost = optionalPost.get();
+
+            existingPost.setPost_writer(postRequestDto.getPost_writer());
+            existingPost.setPost_title(postRequestDto.getPost_title());
+            existingPost.setPost_content(postRequestDto.getPost_content());
+
+            postRepository.save(existingPost);
+        }
+
+        else{
+            System.out.println("no instance with " + id);
+        }
     }
 }
