@@ -33,19 +33,26 @@ public class PostApiController {
 
 
     @PutMapping("/post/update/{id}")
-    public PostResponseDto updatePost(@PathVariable("id") Integer id,
+    public void updatePost(@PathVariable("id") Integer id,
                                       @RequestBody @Validated PostRequestDto request){
-        postService.updatePost(id, request);
+        Optional<Post> optionalPost = postRepository.findById(id);
 
-        Optional<Post> findPost = postRepository.findById(id);
-        Post post = findPost.get();
+        if (optionalPost.isPresent()) {
+            Post existingComment = optionalPost.get();
 
-        return new PostResponseDto(
-                post.getPost_id(),
-                post.getPost_writer(),
-                post.getPost_title(),
-                post.getPost_content()
-        );
+            existingComment.setPost_id(request.getPost_id());
+            existingComment.setPost_writer(request.getPost_writer());
+            existingComment.setPost_title(request.getPost_title());
+            existingComment.setPost_content(request.getPost_content());
+
+            postRepository.save(existingComment);
+        }
+        else {
+            // ID에 해당하는 댓글이 없는 경우에 대한 처리를 여기에 추가할 수 있습니다.
+            // 예를 들어, 예외를 던지거나 로그를 남기는 등의 처리가 가능합니다.
+            // 여기에서는 간단히 로그를 출력하도록 합니다.
+            System.out.println("게시글을 찾을 수 없습니다. ID: " + id);
+        }
     }
 
     @GetMapping("/post/readAll")

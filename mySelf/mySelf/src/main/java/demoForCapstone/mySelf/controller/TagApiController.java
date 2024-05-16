@@ -29,17 +29,22 @@ public class TagApiController {
     }
 
     @PutMapping("/tag/update/{id}")
-    public TagResponseDto updateTag(@PathVariable("id") Integer id,
+    public void updateTag(@PathVariable("id") Integer id,
                                     @RequestBody @Validated TagRequestDto request) {
-        tagService.updateTag(id, request);
+        Optional<Tag> optionalTag = tagRepository.findById(id);
 
-        Optional<Tag> findTag = tagRepository.findById(id);
-        Tag tag = findTag.get();
+        if (optionalTag.isPresent()) {
+            Tag existingTag = optionalTag.get();
 
-        return new TagResponseDto(
-                tag.getTag_id(),
-                tag.getTag_name()
-        );
+
+            existingTag.setTag_id(request.getTag_id());
+            existingTag.setTag_name(request.getTag_name());
+
+            tagRepository.save(existingTag);
+        }
+        else {
+            System.out.println("태그를 찾을 수 없습니다. ID: " + id);
+        }
     }
 
 
