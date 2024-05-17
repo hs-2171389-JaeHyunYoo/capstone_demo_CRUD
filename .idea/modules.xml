@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/capstone_demo_CRUD.iml" filepath="$PROJECT_DIR$/.idea/capstone_demo_CRUD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mySelf.iml" filepath="$PROJECT_DIR$/.idea/modules/mySelf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mySelf.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mySelf.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mySelf.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mySelf.test.iml" />
     </modules>
   </component>
 </project>

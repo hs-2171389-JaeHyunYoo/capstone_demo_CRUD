@@ -49,6 +49,12 @@ public class UserServiceImpl implements UserService {
         return UserRequestDto.builder()
                 .user_id(user.getUser_id())
                 .user_nickname(user.getUser_nickname())
+                .pet_name(user.getPet_name())
+                .pet_age(user.getPet_age())
+                .user_introduce(user.getUser_introduce())
+                .user_follower_count(user.getUser_follower_count())
+                .user_following_count(user.getUser_following_count())
+                .user_post_count(user.getUser_post_count())
                 .build();
     }
 

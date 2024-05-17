@@ -20,7 +20,7 @@ public class UserApiController {
     private final UserRepository userRepository;
 
     @PostMapping("/user/insert")
-    public UserResponseDto saevUser(@RequestBody @Validated UserRequestDto request){
+    public UserResponseDto saveUser(@RequestBody @Validated UserRequestDto request){
         userService.saveUser(request);
         return new UserResponseDto(
                 request.toEntity().getUser_id(),
@@ -42,7 +42,6 @@ public class UserApiController {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
 
-
             existingUser.setUser_id(request.getUser_id());
             existingUser.setUser_nickname(request.getUser_nickname());
             existingUser.setPet_name(request.getPet_name());
@@ -56,16 +55,15 @@ public class UserApiController {
             userRepository.save(existingUser);
         }
         else {
-            // ID에 해당하는 댓글이 없는 경우에 대한 처리를 여기에 추가할 수 있습니다.
-            // 예를 들어, 예외를 던지거나 로그를 남기는 등의 처리가 가능합니다.
-            // 여기에서는 간단히 로그를 출력하도록 합니다.
             System.out.println("유저를 찾을 수 없습니다. ID: " + id);
         }
     }
 
+    //왜 안되지
     @GetMapping("/user/read/{id}")
     public UserResponseDto findUser (@PathVariable("id") Integer id){
         UserRequestDto user = userService.getUser(id);
+
         return new UserResponseDto(
                 user.getUser_id(),
                 user.getUser_nickname(),
@@ -87,7 +85,14 @@ public class UserApiController {
             UserRequestDto build = UserRequestDto.builder()
                     .user_id(user.getUser_id())
                     .user_nickname(user.getUser_nickname())
+                    .pet_name(user.getPet_name())
+                    .pet_age(user.getPet_age())
+                    .user_introduce(user.getUser_introduce())
+                    .user_follower_count(user.getUser_follower_count())
+                    .user_following_count(user.getUser_following_count())
+                    .user_post_count(user.getUser_post_count())
                     .build();
+
             allUser.add(build);
         }
 

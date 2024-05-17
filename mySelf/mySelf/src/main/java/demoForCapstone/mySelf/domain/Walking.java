@@ -2,30 +2,43 @@ package demoForCapstone.mySelf.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Walking {
     @Id
-    private Integer id;
+    @GeneratedValue
+    @Column (name = "walking_id")
+    private Integer walking_id;
 
-    @Column
-    private Integer distance;
+    @Column (name = "walking_start")
+    private LocalDateTime walking_start;
+
+    @Column (name = "walking_stop")
+    private LocalDateTime walking_end;
+
+    @Column (name = "walking_distance")
+    private Double walking_distance;
+
+    @Column (name = "walking_calorie")
+    private Integer walking_calorie;
 
     @Builder
-    public Walking(Integer id, Integer distance){
-        this.id = id;
-        this.distance = distance;
+    public Walking(Integer walking_id, LocalDateTime walking_start, LocalDateTime walking_end, Double walking_distance,
+                   Integer walking_calorie){
+        this.walking_id = walking_id;
+        this.walking_start = walking_start;
+        this.walking_end = walking_end;
+        this.walking_distance = walking_distance;
+        this.walking_calorie = walking_calorie;
     }
 
-    public void updateWalking(Integer id, Integer distance) {
-        this.id = id;
-        this.distance = distance;
-    }
 }

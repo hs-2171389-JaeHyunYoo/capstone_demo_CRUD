@@ -60,16 +60,6 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteById(id);
     }
 
-//    @Transactional
-//    @Override
-//    public void updateComment(Integer id, CommentRequestDto commentRequestDto) {
-//        Optional<Comment> byId = commentRepository.findById(id);
-//        Comment comment = byId.get();
-//
-//        comment.updateComment(commentRequestDto.getComment_id(), commentRequestDto.getComment_writer(), commentRequestDto.getComment_content());
-//
-//    }
-
     @Transactional
     @Override
     public void updateComment(Integer id, CommentRequestDto commentRequestDto){
